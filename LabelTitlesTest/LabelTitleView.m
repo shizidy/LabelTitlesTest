@@ -35,6 +35,7 @@ static CGFloat const labelHeight = 30;
         NSString *title = self.titleArray[i];
         CGFloat labelW = [title boundingRectWithSize:CGSizeMake(kscreenWidth, labelHeight) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:16]} context:nil].size.width + 10 * 2;
         CGFloat labelX = CGRectGetMaxX(self.tempLabel.frame) + space;
+        //判断是否换行
         if (labelX + labelW > kscreenWidth - space * 2) {
             labelX = space;
             labelY = CGRectGetMaxY(self.tempLabel.frame) + space;
@@ -47,9 +48,10 @@ static CGFloat const labelHeight = 30;
         label.text = title;
         label.layer.backgroundColor = [[UIColor orangeColor] CGColor];
         label.layer.cornerRadius = labelH / 2;
-        
+        //保存上一个label
         self.tempLabel = label;
     }
+    //重置frame
     self.frame = CGRectMake(CGRectGetMinX(self.frame), CGRectGetMinY(self.frame), CGRectGetWidth(self.frame), CGRectGetMaxY(self.tempLabel.frame) + space);
 }
 
